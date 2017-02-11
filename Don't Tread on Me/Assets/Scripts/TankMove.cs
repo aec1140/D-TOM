@@ -22,7 +22,7 @@ public class TankMove : MonoBehaviour {
 	void Update () {
 
         //move forward - currently very shitty on keyboard
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(Vector3.forward * speed * Time.deltaTime);
         }
@@ -33,7 +33,7 @@ public class TankMove : MonoBehaviour {
         }
 
         //move backward - see move forward
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(Vector3.back * speed * Time.deltaTime);
         }

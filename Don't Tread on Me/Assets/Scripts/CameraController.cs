@@ -21,6 +21,7 @@ public class CameraController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        // follow code
         Vector3 goalPos = target.position;
         goalPos.x = goalPos.x - xOffset;
         goalPos.z = goalPos.z - xOffset;
