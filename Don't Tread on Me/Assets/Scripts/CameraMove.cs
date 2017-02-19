@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraMove : MonoBehaviour {
 
     public int cameraSpeed = 10;
+    public GameObject constraint;
 
 	// Use this for initialization
 	void Start () {
