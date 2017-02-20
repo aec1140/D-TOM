@@ -11,11 +11,11 @@ public class CameraController : MonoBehaviour {
     public float zOffset = 10;
     public int cameraSpeed = 10;
     public float distanceCap = 100;
+    public Camera camera;
+    public GameObject waypoint;
 
     private Vector3 oldPosition;
     private Vector3 oldTargetPosition;
-
-    private Vector3 velocity = Vector3.zero;
 
     // Use this for initialization
     void Start()
@@ -64,19 +64,50 @@ public class CameraController : MonoBehaviour {
         // because you cant just add staight to the x and z value of transform position
         Vector3 correction = transform.position;
 
-        if(Mathf.Abs(a.x - b.x) > distanceCap)
+        // math and stuff
+
+        // Method 1 (rectangular bounds)
+        if(Mathf.Abs((a.x - a.z) - (b.x - b.z)) > distanceCap)
         {
             correction.x = oldPosition.x;
-        }
-
-        if (Mathf.Abs(a.z - b.z) > distanceCap)
-        {
             correction.z = oldPosition.z;
         }
+
+        if (Mathf.Abs((a.x + a.z) - (b.x + b.z)) > distanceCap)
+        {
+            correction.x = oldPosition.x;
+            correction.z = oldPosition.z;
+        }
+
+        /* Method 2 (circular bounds)
+        if(Vector3.Distance(a, b) > distanceCap)
+        {
+            correction.x = oldPosition.x;
+            correction.z = oldPosition.z;
+        }
+        */
 
         transform.position = correction;
 
         // update tank's old position
         oldTargetPosition = target.transform.position;
+
+        // create waypoints
+        if (Input.GetButton("LT"))
+        {
+            CreateWaypoint();
+        }
+    }
+
+    // waypoint creator
+    void CreateWaypoint()
+    {
+        RaycastHit hit;
+        Ray ray = camera.ScreenPointToRay(camera.transform.forward);
+        
+        if(Physics.Raycast(ray, out hit))
+        {
+            Instantiate(waypoint, hit.transform);
+        }
     }
 }

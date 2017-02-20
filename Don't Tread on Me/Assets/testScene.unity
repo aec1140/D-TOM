@@ -1291,6 +1291,8 @@ MonoBehaviour:
   zOffset: 10
   cameraSpeed: 10
   distanceCap: 10
+  camera: {fileID: 930555202}
+  waypoint: {fileID: 1384921786400630, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd, type: 2}
 --- !u!81 &930555199
 AudioListener:
   m_ObjectHideFlags: 0
