@@ -23,12 +23,12 @@ public class Explode : MonoBehaviour {
     //public rockets rocketa;
 
     GameObject player;
-    TankMove tankmove;
+    PlayerTank playertank;
     
 	// Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
-        tankmove = player.GetComponent<TankMove>();
+        playertank = player.GetComponent<PlayerTank>();
 	}
 	
 	// Update is called once per frame
@@ -61,8 +61,8 @@ public class Explode : MonoBehaviour {
                 float damage = 15 - (damageDropoff * ((Vector3.Distance(hit.gameObject.transform.position, pos))/radius));
                 print("Damage: " + damage);
                 //I have no idea how to actually make the hit.gameObject take the damage
-                if (tankmove.HP > 0) {
-                    tankmove.TakeDamage(damage);
+                if (playertank.HP > 0) {
+                    playertank.TakeDamage(damage);
                 }
             }
 
