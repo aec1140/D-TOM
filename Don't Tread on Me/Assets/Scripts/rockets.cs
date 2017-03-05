@@ -18,7 +18,8 @@ public class rockets : MonoBehaviour {
 
     GameObject player;
     PlayerTank playertank;
-
+    GameObject f;
+    ActiveReload activeReload;
 
     // For changing ammo
     public int currentAmmoType = 1;                         // Ammo being Used
@@ -42,6 +43,11 @@ public class rockets : MonoBehaviour {
 		rocketTrue = true;
         player = GameObject.FindGameObjectWithTag("Player");
         playertank = player.GetComponent<PlayerTank>();
+        //activeReload.reloading = false;
+        f = GameObject.Find("ActiveReload");
+        activeReload = f.GetComponent<ActiveReload>();
+        playertank.amDriver = false;  //################################   REMOVE
+        print(playertank.amDriver);
     }
 
     void Update()
@@ -50,12 +56,21 @@ public class rockets : MonoBehaviour {
         {
             if (Input.GetMouseButton(0) || Input.GetAxis("RightTrigger") > 0)
             {
-                if (Time.time - timeLast > reloadTime)
+                //if (Time.time - timeLast > reloadTime)
+                //{
+                if (rocketTrue)
                 {
-                    rocketTrue = true;
+                    //rocketTrue = true;
                     FireProjectile(currentAmmoType);
-                    timeLast = Time.time;
-                }//reload time
+                    rocketTrue = false;
+                    
+                    //timeLast = Time.time;
+                } else if (!rocketTrue)
+                {
+                    f.SetActive(true);
+                    activeReload.reloading = true;
+                }
+                //}//reload time
             }
             if (Input.GetMouseButton(1))
             {
