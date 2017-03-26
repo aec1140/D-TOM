@@ -12,7 +12,7 @@ public class PlayerTank : MonoBehaviour {
     private float modSpeed;
     private float modRotateSpeed;
 
-    public float HP = 100;
+    //public float HP = 100;
 
     public int BoostTotal = 300; //5 seconds of boost
     private int BoostFrames = 300;
@@ -185,20 +185,21 @@ public class PlayerTank : MonoBehaviour {
             #endregion
         }
     }
+    #region old takeDamage
+    //public void TakeDamage(float damage)
+    //{
+    //    //subtract damage from HP
+    //    HP -= damage;
+    //    // print("Current HP: " + HP);
 
-    public void TakeDamage(float damage)
-    {
-        //subtract damage from HP
-        HP -= damage;
-        // print("Current HP: " + HP);
-
-        //if no HP
-        if (HP <= 0)
-        {
-            //destroy the tank
-            print("She's dead, Jim");
-        }
-    }//take damage
+    //    //if no HP
+    //    if (HP <= 0)
+    //    {
+    //        //destroy the tank
+    //        print("She's dead, Jim");
+    //    }
+    //}//take damage
+    #endregion
 
     public void rotateRigidBodyAroundPointBy(Rigidbody rb, Vector3 origin, Vector3 axis, float angle)
     {

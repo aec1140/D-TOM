@@ -52,18 +52,28 @@ public class Explode : MonoBehaviour {
 				rb.AddExplosionForce(force, pos, radius, upMod, fMode);
 
 			}//if
-
+            #region old hp method
             //this method sucks. find a better way to do it
             //if the thing it hit was a tank
-            if (hit.gameObject.tag == "Player")
+            //if (hit.gameObject.tag == "Player")
+            //{
+            //    //calculate damage based on distance to explosion epicenter
+            //    float damage = 15 - (damageDropoff * ((Vector3.Distance(hit.gameObject.transform.position, pos))/radius));
+            //    print("Damage: " + damage);
+            //    //I have no idea how to actually make the hit.gameObject take the damage
+            //    if (playertank.HP > 0) {
+            //        playertank.TakeDamage(damage);
+            //    }
+            //}
+            #endregion
+            //if the collider's gameobject has the script HP
+            if ((hit.gameObject.GetComponent("HP") as HP) != null)
             {
-                //calculate damage based on distance to explosion epicenter
-                float damage = 15 - (damageDropoff * ((Vector3.Distance(hit.gameObject.transform.position, pos))/radius));
-                print("Damage: " + damage);
-                //I have no idea how to actually make the hit.gameObject take the damage
-                if (playertank.HP > 0) {
-                    playertank.TakeDamage(damage);
-                }
+                //calculate individual damage
+                float damage = 15 - (damageDropoff * ((Vector3.Distance(hit.gameObject.transform.position, pos)) / radius));
+
+                //call the objects takeDamage method
+                hit.gameObject.GetComponent<HP>().TakeDamage(damage);
             }
 
                     /*
@@ -76,7 +86,7 @@ public class Explode : MonoBehaviour {
                     hit.transform.parent.parent.gameObject.GetComponent<CharacterController>().Move(TossDirection * speed); //holy shit it actually works
                     //hit.transform.parent.transform.parent.gameObject.GetComponent<CharacterController>().Move(TossDirection * speed);
                 }*/
-			}//foreach
+            }//foreach
 		Destroy(gameObject); // destroys the projectile after impact
 
     }
