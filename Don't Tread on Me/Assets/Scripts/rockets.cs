@@ -3,8 +3,11 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using TeamUtility.IO;
 
 public class rockets : MonoBehaviour {
+
+    public PlayerID gunner;
 
     // Variable Declaration
     public Rigidbody Projectile = null;
@@ -16,7 +19,6 @@ public class rockets : MonoBehaviour {
     public float reloadTime = 0.5f;
     private float timeLast = 0.0f;
 
-    GameObject gunner;
     GameObject rld;
     ActiveReload activeReload;
 
@@ -51,7 +53,7 @@ public class rockets : MonoBehaviour {
     {
         if (true) // we have to fix how this works yo
         {
-            if (Input.GetMouseButton(0) || Input.GetAxis("RightTrigger") > 0)
+            if (InputManager.GetAxis("Right Trigger", gunner) > 0)
             {
                 if (Time.time - timeLast > reloadTime)//(rocketTrue)
                 {
@@ -64,27 +66,18 @@ public class rockets : MonoBehaviour {
                 }*/
                 //reload time
             }
-            if (Input.GetMouseButton(1))
-            {
-                if (Time.time - timeLast > reloadTime)
-                {
-                    rocketTrue = false;
-                    FireProjectile(currentAmmoType);
-                    timeLast = Time.time;
-                }//reload time
-            }
         }
 
-        if (Input.GetKeyDown("f") || Input.GetButtonDown("B"))
+        if (InputManager.GetButtonDown("Button B", gunner))
         {
             print("Current Ammo Type: " + currentAmmoType);
         }
 
-        if (Input.GetKey("f") || Input.GetButton("B"))
+        if (InputManager.GetButton("Button B", gunner))
         {
             CheckInputs();
         }
-        if (Input.GetKeyUp("f") || Input.GetButtonUp("B"))
+        if (InputManager.GetButtonUp("Button B", gunner))
         {
             p = 0;
             print("Canceled Ammo Change");

@@ -1,8 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TeamUtility.IO;
 
-public class CommanderGun : MonoBehaviour {
+public class CommanderGun : MonoBehaviour
+{
+
+    public PlayerID commander;
 
     public bool amCommander = true;
     public float rotateSpeed = 1;
@@ -19,21 +23,23 @@ public class CommanderGun : MonoBehaviour {
     private float oldY = 0;
     private int tracerCounter = 0;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (amCommander)
         {
-            float x = Input.GetAxis("RightThumbStick");
-            float y = Input.GetAxis("RightThumbVertical");
+            float x = InputManager.GetAxis("Right Stick Horizontal", commander);
+            float y = InputManager.GetAxis("Right Stick Vertical", commander);
 
             float angle;
 
-            if(Mathf.Abs(x) < deadZone && Mathf.Abs(y) < deadZone)
+            if (Mathf.Abs(x) < deadZone && Mathf.Abs(y) < deadZone)
             {
                 angle = Mathf.Atan2(oldX, -oldY);
             }
@@ -56,7 +62,7 @@ public class CommanderGun : MonoBehaviour {
         {
             GameObject newBullet;
 
-            if(tracerCounter == tracerCap)
+            if (tracerCounter == tracerCap)
             {
                 newBullet = Instantiate(tracer, firePoint.transform.position, transform.rotation);
                 tracerCounter = 0;

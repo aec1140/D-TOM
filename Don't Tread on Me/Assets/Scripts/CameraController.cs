@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TeamUtility.IO;
 
 public class CameraController : MonoBehaviour
 {
+    public PlayerID commander;
 
     // target of camera
     public Transform target;
@@ -46,13 +48,13 @@ public class CameraController : MonoBehaviour
         if (amCommander)
         {
             // apple input
-            if (Input.GetAxis("LeftThumbStick") != 0.0f)
+            if (InputManager.GetAxis("Left Stick Vertical", commander) != 0.0f)
             {
-                transform.Translate(new Vector3(1, 0, 1) * -Input.GetAxis("LeftThumbStick") * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
+                transform.Translate(new Vector3(1, 0, 1) * -InputManager.GetAxis("Left Stick Vertical", commander) * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
             }
-            if (Input.GetAxis("LeftThumbHorizontal") != 0.0f)
+            if (InputManager.GetAxis("Left Stick Horizontal", commander) != 0.0f)
             {
-                transform.Translate(new Vector3(-1, 0, 1) * -Input.GetAxis("LeftThumbHorizontal") * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
+                transform.Translate(new Vector3(-1, 0, 1) * -InputManager.GetAxis("Left Stick Horizontal", commander) * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
             }
         }
 
@@ -107,7 +109,7 @@ public class CameraController : MonoBehaviour
         // create waypoints - in progress
         if (amCommander)
         {
-            if (Input.GetAxis("LeftTrigger") > 0)
+            if (InputManager.GetAxis("Left Trigger", commander) > 0)
             {
                 if (Time.time - timeLast > reloadTime)
                 {
@@ -116,7 +118,7 @@ public class CameraController : MonoBehaviour
                 }
             }
 
-            if (Input.GetAxis("RightTrigger") > 0)
+            if (InputManager.GetAxis("Right Trigger", commander) > 0)
             {
                 if (Time.time - timeLast > reloadTime)
                 {
@@ -135,7 +137,7 @@ public class CameraController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if(hit.transform.gameObject.tag == "Plane")
+            if (hit.transform.gameObject.tag == "Plane")
             {
                 currentWaypoint = Instantiate(waypoint, hit.point, Quaternion.identity);
             }
@@ -151,7 +153,7 @@ public class CameraController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if(hit.transform.gameObject.tag != "Plane")
+            if (hit.transform.gameObject.tag != "Plane")
             {
                 currentWaypoint = Instantiate(marker, hit.point, Quaternion.identity);
                 currentWaypoint.transform.SetParent(hit.transform);
