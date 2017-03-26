@@ -8,13 +8,13 @@ public class EnemyTank : MonoBehaviour
 
     // Variable Declaration
     public Rigidbody Projectile = null;
-    public Transform Launcher = null;
     private const float SPAWN_DISTANCE = 1.0f;
     public int power = 20;
     public float detectionRange = 100;
     public float shootingRange = 100;
     public bool rocketTrue;
 
+    public Transform Launcher;
     public GameObject tankBody;
     public GameObject tankTop;
     public GameObject target;
@@ -58,7 +58,7 @@ public class EnemyTank : MonoBehaviour
         {
             clone = Instantiate(Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.up), Launcher.transform.rotation) as Rigidbody;
         }
-        clone.velocity = transform.TransformDirection(Vector3.up * power);
+        clone.velocity = Launcher.transform.TransformDirection(Vector3.up * power);
         Explode explo = (Explode)clone.gameObject.AddComponent(typeof(Explode)); //clone.AddComponent<Explode>();
         //Destroy(clone);
     }
