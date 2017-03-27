@@ -7,9 +7,6 @@ public class HP : MonoBehaviour {
     public float MaxHP;
     private float CurrHP;
 
-    public float getCurrHP()
-    { return CurrHP; }
-
 	// Use this for initialization
 	void Start () {
         CurrHP = MaxHP;

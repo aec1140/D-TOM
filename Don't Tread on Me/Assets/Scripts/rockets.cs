@@ -43,8 +43,8 @@ public class rockets : MonoBehaviour {
         // player = GameObject.FindGameObjectWithTag("Player");
         // playerTank = player.GetComponent<PlayerTank>();
 
-        rld = GameObject.Find("ActiveReload");
-        activeReload = rld.GetComponent<ActiveReload>();
+        //rld = GameObject.Find("ActiveReload");
+        //activeReload = rld.GetComponent<ActiveReload>();
     }
 
     void Update()
@@ -53,16 +53,15 @@ public class rockets : MonoBehaviour {
         {
             if (Input.GetMouseButton(0) || Input.GetAxis("RightTrigger") > 0)
             {
-                if (rocketTrue)//(Time.time - timeLast > reloadTime)//(rocketTrue)
+                if (Time.time - timeLast > reloadTime)//(rocketTrue)
                 {
-                    //rocketTrue = true;
+                    rocketTrue = true;
                     FireProjectile(currentAmmoType);
-                    rocketTrue = false;
-                    //timeLast = Time.time;
-                } else if (!rocketTrue) {
-                    rld.SetActive(true);
-                    activeReload.reloading = true;
-                }
+                    //rocketTrue = false;
+                    timeLast = Time.time;
+                } /*else if (!rocketTrue) {
+                    //rld.SetActive.re
+                }*/
                 //reload time
             }
             if (Input.GetMouseButton(1))

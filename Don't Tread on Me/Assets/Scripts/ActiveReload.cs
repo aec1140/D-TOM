@@ -36,15 +36,14 @@ public class ActiveReload : MonoBehaviour {
 
             if (Input.GetAxis("LeftTrigger") > 0 && !reloadAttempt) {
 
-                if (marker.transform.position.x < sweetSpot.transform.position.x + spotWidth - 10 &&
+                if (marker.transform.position.x < sweetSpot.transform.position.x + spotWidth &&
                    marker.transform.position.x + markerWidth > sweetSpot.transform.position.x )
                 {
                     //print("Good Reload");
                     rockets.rocketTrue = true;
-                    marker.transform.position = new Vector3(175f, 46.68f, 0);//Vector3(74f, 68.89f, 0);
+                    marker.transform.position = new Vector3(74f, 68.89f, 0);
                     reloading = false;
-                    //reloadOn.SetActive(false);
-                    this.gameObject.SetActive(false);
+                    reloadOn.SetActive(false);
                 } else 
                 {
                     reloadAttempt = true;
@@ -52,14 +51,13 @@ public class ActiveReload : MonoBehaviour {
                     reloadSpeed = 25;
                 }
             }
-            if (marker.transform.position.x >= 309.0f)//220.0f)
+            if (marker.transform.position.x >= 220.0f)
             {
                 //print("Reload Complete" + marker.transform.position.x + "      " + marker.transform.position.y);
                 rockets.rocketTrue = true;
-                marker.transform.position = new Vector3(175f, 46.68f, 0);//Vector3(74f, 68.89f, 0);
+                marker.transform.position = new Vector3(74f, 68.89f, 0);
                 reloading = false;
-                //reloadOn.SetActive(false);
-                this.gameObject.SetActive(false);
+                reloadOn.SetActive(false);
                 reloadAttempt = false;
                 reloadSpeed = 50;
             }
