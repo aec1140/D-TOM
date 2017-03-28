@@ -40,7 +40,8 @@ public class PlayerTank : MonoBehaviour {
         {
             HPbar.transform.GetChild(e).gameObject.SetActive(true);
         }
-	}
+
+    }
 	
 	// Update is called once per frame
 	void FixedUpdate () {
@@ -195,6 +196,10 @@ public class PlayerTank : MonoBehaviour {
             #endregion
         }
 
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            flipTank();
+        }
         currentHP = this.gameObject.GetComponent<HP>().getCurrHP();
         percentHP = currentHP / totalHP;
         CalcHPBar(percentHP);
@@ -215,6 +220,17 @@ public class PlayerTank : MonoBehaviour {
     //}//take damage
     #endregion
 
+    //this is like putting a bandaid on a gunshot wound
+    public void flipTank()
+    {
+        if (Vector3.Dot(transform.up, Vector3.up) < 0) //will be positive if local up vector has a down component and 1 if it's completely flipped
+        {
+            Vector3 newPos = new Vector3(this.transform.position.x, this.transform.position.y + 10, this.transform.position.z);
+            rb.MovePosition(newPos);
+            rotateRigidBodyAroundPointBy(rb, leftTreadPivot.transform.position, leftTreadPivot.transform.forward, 180);
+        }
+    }
+    
     //method to calculate what pips to show in HP; probably not the most efficient solution
     //nested ifs would probably be better, but wouldnt look as nice
     public void CalcHPBar(float percentage)
