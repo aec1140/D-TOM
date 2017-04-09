@@ -3,22 +3,22 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Linq;
+using TeamUtility.IO;
 
 public class rockets : MonoBehaviour {
 
+    private PlayerID gunner;
+
     // Variable Declaration
-    public Rigidbody Projectile = null;
-    public Transform Launcher = null;
+    public Rigidbody projectile = null;
+    public Transform launcher = null;
+    public GameObject tankTop;
     private const float SPAWN_DISTANCE = 1.0f;
     public int power = 50;
 	public bool rocketTrue;
 
     public float reloadTime = 0.5f;
     private float timeLast = 0.0f;
-
-    GameObject gunner;
-    GameObject rld;
-    ActiveReload activeReload;
 
     // For changing ammo
     public int currentAmmoType = 1;                         // Ammo being Used
@@ -34,58 +34,26 @@ public class rockets : MonoBehaviour {
     private int[] ammo2 = new int[4] { 2, 3, 4, 1 };
     private int[] ammo3 = new int[4] { 3, 2, 1, 4 };
     private int[] ammo4 = new int[4] { 4, 1, 3, 2 };
-
-
     // Use this for initialization
     void Start()
     {
-		rocketTrue = true;
-        // player = GameObject.FindGameObjectWithTag("Player");
-        // playerTank = player.GetComponent<PlayerTank>();
-
-        rld = GameObject.Find("ActiveReload");
-        activeReload = rld.GetComponent<ActiveReload>();
+        // this code is for managing player roles
+        GameObject inputMngr = GameObject.Find("InputManager");
+        gunner = inputMngr.GetComponent<PlayerRoles>().gunner;
     }
 
     void Update()
-    {
-        if (true) // we have to fix how this works yo
-        {
-            if (Input.GetMouseButton(0) || Input.GetAxis("RightTrigger") > 0)
-            {
-                if (rocketTrue)//(Time.time - timeLast > reloadTime)//(rocketTrue)
-                {
-                    //rocketTrue = true;
-                    FireProjectile(currentAmmoType);
-                    rocketTrue = false;
-                    //timeLast = Time.time;
-                } else if (!rocketTrue) {
-                    rld.SetActive(true);
-                    activeReload.reloading = true;
-                }
-                //reload time
-            }
-            if (Input.GetMouseButton(1))
-            {
-                if (Time.time - timeLast > reloadTime)
-                {
-                    rocketTrue = false;
-                    FireProjectile(currentAmmoType);
-                    timeLast = Time.time;
-                }//reload time
-            }
-        }
-
-        if (Input.GetKeyDown("f") || Input.GetButtonDown("B"))
+    {      
+        if (InputManager.GetButtonDown("Button B", gunner))
         {
             print("Current Ammo Type: " + currentAmmoType);
         }
 
-        if (Input.GetKey("f") || Input.GetButton("B"))
+        if (InputManager.GetButton("Button B", gunner))
         {
             CheckInputs();
         }
-        if (Input.GetKeyUp("f") || Input.GetButtonUp("B"))
+        if (InputManager.GetButtonUp("Button B", gunner))
         {
             p = 0;
             print("Canceled Ammo Change");
@@ -93,19 +61,19 @@ public class rockets : MonoBehaviour {
 
     }
 	
-	void FireProjectile(int type)
+	public void FireProjectile(int type)
 	{
 		Rigidbody clone;
 		if (type == 0) 
 		{
-			clone = Instantiate (Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.forward), Launcher.transform.rotation) as Rigidbody;
+			clone = Instantiate (projectile, launcher.transform.position + (SPAWN_DISTANCE * launcher.transform.forward), launcher.transform.rotation) as Rigidbody;
 		} 
 		else 
 		{
-			clone = Instantiate (Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.forward), Launcher.transform.rotation) as Rigidbody;
+			clone = Instantiate (projectile, launcher.transform.position + (SPAWN_DISTANCE * launcher.transform.forward), launcher.transform.rotation) as Rigidbody;
 		}
-        clone.velocity = transform.TransformDirection(Vector3.forward * power);
-        Explode explo = (Explode)clone.gameObject.AddComponent(typeof(Explode)); //clone.AddComponent<Explode>();
+        clone.velocity = tankTop.transform.TransformDirection(Vector3.forward * power);
+        //Explode explo = (Explode)clone.gameObject.AddComponent(typeof(Explode)); //clone.AddComponent<Explode>();
         //Destroy(clone);
     }
 
