@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TeamUtility.IO;
 
-public class rockets : MonoBehaviour {
+public class Rockets : MonoBehaviour {
 
     private PlayerID gunner;
 

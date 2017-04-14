@@ -5,14 +5,16 @@ using TeamUtility.IO;
 
 public class Commander : MonoBehaviour {
 
-    public GameObject target;
+    public GameObject follow;
     public GameObject crate;
-    public GameObject reticle;
     public GameObject shield;
     public GameObject mark;
     public GameObject airstrike;
+    public GameObject target;
+    public GameObject reticle;
 
     public float translateSpeed = 10.0f;
+    public float reticleRotateSpeed = 2.0f;
     public float crateHeight = 100.0f;
     public float timerCap = 1.0f;
     public float airstrikeHeight = 100.0f;
@@ -36,20 +38,30 @@ public class Commander : MonoBehaviour {
     private float oldRetX = 0;
     private float oldRetY = 0;
     private int currentMode = 0;
-    private float raycastHeight = 10.0f;
 
     private Vector3 oldTargetPosition;
     private float timerLast = 0.0f;
 
-    protected GameObject inputMngr;
+    public GameObject commanderPanel;
+    private Animator anim;
+
+    private GameObject inputMngr;
+    private PlayerRoles playerRoles;
     public PlayerID playerID;
 
     // Use this for initialization
     void Start () {
 
-        oldTargetPosition = target.transform.position;
+        oldTargetPosition = follow.transform.position;
+
+        // Init
+        anim = commanderPanel.GetComponent<Animator>();
+        anim.enabled = true;
 
         inputMngr = GameObject.Find("InputManager");
+        playerRoles = inputMngr.GetComponent<PlayerRoles>();
+        playerRoles.HidePanel(anim);
+
         playerID = inputMngr.GetComponent<PlayerRoles>().commander;
     }
 	
@@ -59,21 +71,32 @@ public class Commander : MonoBehaviour {
         if (playerID != inputMngr.GetComponent<PlayerRoles>().commander) return;
 
         // follow the tank
-        Vector3 follow = target.transform.position - oldTargetPosition;
-        reticle.transform.Translate(follow, Space.World);
+        Vector3 temp = follow.transform.position - oldTargetPosition;
+        target.transform.Translate(temp, Space.World);
 
         // movement input
         if (InputManager.GetAxis("Left Stick Vertical", playerID) != 0.0f)
         {
-            reticle.transform.Translate(new Vector3(1, 0, 1) * -InputManager.GetAxis("Left Stick Vertical", playerID) * translateSpeed  * Time.deltaTime, Space.World);
+            target.transform.Translate(new Vector3(1, 0, 1) * -InputManager.GetAxis("Left Stick Vertical", playerID) * translateSpeed  * Time.deltaTime, Space.World);
         }
         if (InputManager.GetAxis("Left Stick Horizontal", playerID) != 0.0f)
         {
-            reticle.transform.Translate(new Vector3(-1, 0, 1) * -InputManager.GetAxis("Left Stick Horizontal", playerID) * translateSpeed * Time.deltaTime, Space.World);
+            target.transform.Translate(new Vector3(-1, 0, 1) * -InputManager.GetAxis("Left Stick Horizontal", playerID) * translateSpeed * Time.deltaTime, Space.World);
         }
 
         // update tank's old position
-        oldTargetPosition = target.transform.position;
+        oldTargetPosition = follow.transform.position;
+
+        // update position of commander target
+        int layerMask = 1 << 8;
+        RaycastHit hit;
+
+        Ray ray = new Ray(target.transform.position, Vector3.down);
+
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, layerMask))
+        {
+            reticle.transform.position = hit.point;
+        }
 
         // manage trigger input
         if (InputManager.GetAxis("Left Trigger", playerID) > 0)
@@ -179,6 +202,7 @@ public class Commander : MonoBehaviour {
     // Manages right trigger activation
     void Activate()
     {
+        /*
         float x = InputManager.GetAxis("Right Stick Horizontal", playerID);
         float y = InputManager.GetAxis("Right Stick Vertical", playerID);
 
@@ -197,6 +221,9 @@ public class Commander : MonoBehaviour {
 
         Quaternion destination = Quaternion.EulerAngles(0, angle, 0) * Quaternion.AngleAxis(45, Vector3.down);
         reticle.transform.rotation = Quaternion.Lerp(reticle.transform.rotation, destination, Time.deltaTime * rotateSpeed);
+        */
+
+        reticle.transform.Rotate(0f, (InputManager.GetAxis("Right Stick Horizontal", playerID) * reticleRotateSpeed), 0f);
 
         if (InputManager.GetAxis("Right Trigger", playerID) > 0)
         {
@@ -204,7 +231,7 @@ public class Commander : MonoBehaviour {
             {
                 if (currentMode == 0)
                 {
-                    Vector3 crateStart = reticle.transform.position;
+                    Vector3 crateStart = target.transform.position;
                     crateStart.y = crateHeight;
                     Instantiate(crate, crateStart, Quaternion.identity);
                     timerLast = Time.time;
@@ -216,7 +243,7 @@ public class Commander : MonoBehaviour {
                 }
                 if(currentMode == 2)
                 {
-                    Vector3 strikeStart = reticle.transform.position;
+                    Vector3 strikeStart = target.transform.position;
                     strikeStart.y = airstrikeHeight;
                     Instantiate(airstrike, strikeStart, reticle.transform.rotation);
                     timerLast = Time.time;
@@ -233,12 +260,8 @@ public class Commander : MonoBehaviour {
             if (Time.time - timerLast > timerCap)
             {
                 RaycastHit hit;
-                Vector3 rayPos = reticle.transform.position;
-                rayPos.y = raycastHeight;
 
-                Ray ray = new Ray(rayPos, Vector3.down);
-
-                Debug.DrawRay(rayPos, Vector3.down, Color.green);
+                Ray ray = new Ray(target.transform.position, Vector3.down);
 
                 if (Physics.Raycast(ray, out hit))
                 {

@@ -24,15 +24,26 @@ public class Driver : MonoBehaviour {
     public GameObject rightTreadPivot;
     public GameObject leftTreadPivot;
 
-    GameObject inputMngr;
+    public GameObject driverPanel;
+    private Animator anim;
+
+    private GameObject inputMngr;
+    private PlayerRoles playerRoles;
     public PlayerID playerID;
+
     // Use this for initialization
     void Start () {
         rb = GetComponent<Rigidbody>();
         rotateSpeed = hullRotateSpeed;
 
-        // this code is for managing player roles
+        // Init
+        anim = driverPanel.GetComponent<Animator>();
+        anim.enabled = true;
+
         inputMngr = GameObject.Find("InputManager");
+        playerRoles = inputMngr.GetComponent<PlayerRoles>();
+        playerRoles.HidePanel(anim);
+
         playerID = inputMngr.GetComponent<PlayerRoles>().driver;
     }
 	

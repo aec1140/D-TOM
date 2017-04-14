@@ -8,12 +8,14 @@ public class Engineer : MonoBehaviour {
 
     public Rigidbody Projectile = null;
 
+    
+
     // For Grenade aiming
     public GameObject target;
     public GameObject reticle;
     private Vector3 oldTargetPosition;
     public float translateSpeed = 10.0f;
-    bool sapBck = true;
+    bool snapBack = true;
     public float aimDistance;
 
     // Reload Time
@@ -21,25 +23,41 @@ public class Engineer : MonoBehaviour {
     private float timeLast = 0.0f;
 
     Camera mainCamera;
-    private const float SPAWN_DISTANCE = 3f;
+    private const float SPAWN_DISTANCE = 3.5f;
 
-    GameObject inputMngr;
+    public GameObject engineerPanel;
+    private Animator anim;
+
+    private GameObject inputMngr;
+    private PlayerRoles playerRoles;
     public PlayerID playerID;
+
+    // TEMP For testing other ammo
+    public bool isMine;
+
 
     // Use this for initialization
     void Start () {
 
-        aimDistance = 11f;
+        aimDistance = 15f;
         
         reloadTime = 2f;
 
-        // this code is for managing player roles
+        // Init
+        anim = engineerPanel.GetComponent<Animator>();
+        anim.enabled = true;
+
         inputMngr = GameObject.Find("InputManager");
+        playerRoles = inputMngr.GetComponent<PlayerRoles>();
+        playerRoles.HidePanel(anim);
+
         playerID = inputMngr.GetComponent<PlayerRoles>().engineer;
     }
 	
 	// Update is called once per frame
 	void Update () {
+
+        
 
         if (playerID != inputMngr.GetComponent<PlayerRoles>().engineer) return;
 
@@ -57,10 +75,10 @@ public class Engineer : MonoBehaviour {
                 reticle.SetActive(true);
 
                 // sapBcks the reticle to tank position after pulling let tigger
-                if (sapBck)
+                if (snapBack)
                 {
                     reticle.transform.position = (target.transform.position + new Vector3(0,5.11f,0));
-                    sapBck = false;
+                    snapBack = false;
                 }
                // if (Vector3.Distance(reticle.transform.position, target.transform.position) < aimDistance)
                 
@@ -88,18 +106,28 @@ public class Engineer : MonoBehaviour {
 
                 if (InputManager.GetAxis("Right Trigger", playerID) > 0)
                 {
-
-                    if(Time.time - timeLast > reloadTime)
+                    if (Time.time - timeLast > reloadTime)
                     {
-                        ThrowGrenade(2f);
+
+                        if (!isMine)
+                        {
+                            ThrowGrenade();
+                        } else if (isMine)
+                        {
+                            Rigidbody clone = Instantiate(Projectile, target.transform.position + (SPAWN_DISTANCE * -target.transform.forward), target.transform.rotation) as Rigidbody;
+                        }
+
+
                         timeLast = Time.time;
                     }
                 } 
 
-            } else
+            }
+
+            else
             {
                 reticle.SetActive(false);
-                sapBck = true;
+                snapBack = true;
             } 
         }
 
@@ -134,7 +162,7 @@ public class Engineer : MonoBehaviour {
     }
 
 
-    void ThrowGrenade(float tPWR)
+    void ThrowGrenade()
     {
 
         // Gets the direction from tank to reticle. May not be the most optimal way.

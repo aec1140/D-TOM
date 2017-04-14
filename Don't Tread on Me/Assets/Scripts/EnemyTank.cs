@@ -58,7 +58,6 @@ public class EnemyTank : MonoBehaviour
             clone = Instantiate(Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.up), Launcher.transform.rotation) as Rigidbody;
         }
         clone.velocity = Launcher.transform.TransformDirection(Vector3.up * power);
-        Explode explo = (Explode)clone.gameObject.AddComponent(typeof(Explode)); //clone.AddComponent<Explode>();
         //Destroy(clone);
     }
 

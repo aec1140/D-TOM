@@ -23,9 +23,9 @@ GameObject:
   - component: {fileID: 23844494181918040}
   - component: {fileID: 54244762655674206}
   - component: {fileID: 96799593936828538}
-  - component: {fileID: 114076620981448262}
   - component: {fileID: 122306747196394320}
   - component: {fileID: 65570788236278942}
+  - component: {fileID: 114325437935670284}
   m_Layer: 0
   m_Name: Tracer
   m_TagString: Projectile
@@ -209,7 +209,7 @@ TrailRenderer:
     textureMode: 0
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
---- !u!114 &114076620981448262
+--- !u!114 &114325437935670284
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -217,10 +217,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1499625894707760}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c13267e804a648849aaa0894984d5f3a, type: 3}
+  m_Script: {fileID: 11500000, guid: 86bc1e8f419c133488a4e040dc69284c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 1.5
+  lifeTime: 3
 --- !u!122 &122306747196394320
 Halo:
   m_ObjectHideFlags: 1
