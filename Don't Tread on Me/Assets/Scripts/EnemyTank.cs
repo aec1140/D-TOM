@@ -25,7 +25,7 @@ public class EnemyTank : MonoBehaviour
     public float reloadTime = 3.0f;
     private float timeLast = 0.0f;
 
-
+    public ParticleSystem explosion;
 
     // Use this for initialization
     void Start()
@@ -37,13 +37,12 @@ public class EnemyTank : MonoBehaviour
     {
         Acquire();
 
-        //if (Time.time - timeLast > reloadTime)
-        //{
-        //    rocketTrue = true;
-        //    FireProjectile(0);
-        //    timeLast = Time.time;
-        //}//reload time
-
+        float currentHP = this.gameObject.GetComponent<HP>().getCurrHP();
+        if (currentHP <= 0)
+        {
+            Instantiate(explosion, transform.position, transform.rotation);
+            Destroy(this.gameObject);
+        }
     }
 
     //changed all forces to point up, because for some rason the launcher.transform.forward points down into the ground

@@ -24,11 +24,16 @@ public class Explode : MonoBehaviour {
 
     GameObject player;
     PlayerTank playertank;
+
+     public ParticleSystem explosion;
     
 	// Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
         playertank = player.GetComponent<PlayerTank>();
+
+        // explosion = GetComponent<ParticleSystem>();
+        // explosion.playOnAwake = false;
 	}
 	
 	// Update is called once per frame
@@ -87,7 +92,18 @@ public class Explode : MonoBehaviour {
                     //hit.transform.parent.transform.parent.gameObject.GetComponent<CharacterController>().Move(TossDirection * speed);
                 }*/
             }//foreach
-		Destroy(gameObject); // destroys the projectile after impact
 
+        blowTheFuckUp();
+        //GameObject aftermath = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
+        //explosion.Play();
+        //Destroy(gameObject);
+        //Destroy(gameObject); // destroys the projectile after impact
+
+    }
+
+    void blowTheFuckUp()
+    {
+        Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
