@@ -42,11 +42,7 @@ public class Commander : MonoBehaviour {
     private Vector3 oldTargetPosition;
     private float timerLast = 0.0f;
 
-    public GameObject commanderPanel;
-    private Animator anim;
-
-    private GameObject inputMngr;
-    private PlayerRoles playerRoles;
+    protected GameObject inputMngr;
     public PlayerID playerID;
 
     // Use this for initialization
@@ -54,14 +50,7 @@ public class Commander : MonoBehaviour {
 
         oldTargetPosition = follow.transform.position;
 
-        // Init
-        anim = commanderPanel.GetComponent<Animator>();
-        anim.enabled = true;
-
         inputMngr = GameObject.Find("InputManager");
-        playerRoles = inputMngr.GetComponent<PlayerRoles>();
-        playerRoles.HidePanel(anim);
-
         playerID = inputMngr.GetComponent<PlayerRoles>().commander;
     }
 	
