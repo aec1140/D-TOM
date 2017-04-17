@@ -39,7 +39,7 @@ public class Explode : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         //OnCollisionEnter();
-        //Destroy(gameObject, 5);
+        Destroy(gameObject, 5);
 
 	}
 
@@ -75,7 +75,7 @@ public class Explode : MonoBehaviour {
             if ((hit.gameObject.GetComponent("HP") as HP) != null)
             {
                 //calculate individual damage
-                float damage = force - (damageDropoff * ((Vector3.Distance(hit.gameObject.transform.position, pos)) / radius));
+                float damage = 15 - (damageDropoff * ((Vector3.Distance(hit.gameObject.transform.position, pos)) / radius));
 
                 //call the objects takeDamage method
                 hit.gameObject.GetComponent<HP>().TakeDamage(damage);
@@ -91,9 +91,9 @@ public class Explode : MonoBehaviour {
                     hit.transform.parent.parent.gameObject.GetComponent<CharacterController>().Move(TossDirection * speed); //holy shit it actually works
                     //hit.transform.parent.transform.parent.gameObject.GetComponent<CharacterController>().Move(TossDirection * speed);
                 }*/
-           }//foreach
+            }//foreach
 
-        BlowTheFuckUp();
+        blowTheFuckUp();
         //GameObject aftermath = (GameObject)Instantiate(explosion, transform.position, transform.rotation);
         //explosion.Play();
         //Destroy(gameObject);
@@ -101,9 +101,9 @@ public class Explode : MonoBehaviour {
 
     }
 
-    void BlowTheFuckUp()
+    void blowTheFuckUp()
     {
         Instantiate(explosion, transform.position, transform.rotation);
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
