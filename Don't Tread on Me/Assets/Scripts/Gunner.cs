@@ -100,10 +100,6 @@ public class Gunner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (playerID != playerRoles.gunner) return;
-        print((int)playerID);
-
         playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 
         #region tank top rotation
@@ -146,11 +142,6 @@ public class Gunner : MonoBehaviour {
         #region main gun
         if (!reloading)
         {
-            // draw line
-            // ToDo: this should be a raycast to help see what it is aiming at
-            // Vector3 forward = launcher.transform.TransformDirection(Vector3.forward) * 20;
-            // Debug.DrawRay(launcher.transform.position, forward, Color.red);
-
             if (InputManager.GetAxis("Right Trigger", playerID) == 1)
             {
                 // ToDo: ammotype needs to be implemented

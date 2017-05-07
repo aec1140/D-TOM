@@ -28,6 +28,9 @@ public class EnemyInfantry : MonoBehaviour {
 
     public ParticleSystem explosion;
 
+    GameManager gameManager;
+    protected int pointWorth = 10;
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +38,8 @@ public class EnemyInfantry : MonoBehaviour {
         baseSpeed = speed;
 
         target = GameObject.Find("Player");
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
         //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
@@ -49,6 +54,7 @@ public class EnemyInfantry : MonoBehaviour {
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
             Instantiate(explosion, transform.position, transform.rotation);
+            gameManager.SetScore(pointWorth);
             Destroy(this.gameObject);
         }
 
