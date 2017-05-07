@@ -15,13 +15,12 @@ public class PlayerRoles : MonoBehaviour {
     // Used to playerRoles can grab instanced of Driver, Gunner, Engineer, and Commander scripts
     public GameObject player;
 
-    // Used so every role can reference panels
-    public Transform[] panels = new Transform[4];
-
     public Texture a;
     public Texture b;
     public Texture x;
     public Texture y;
+
+    public Sprite[] helmets = new Sprite[4];
 
     // Use this for initialization
     void Start () {
@@ -169,7 +168,7 @@ public class PlayerRoles : MonoBehaviour {
             }
         }
     }
-    
+
     public void SwapPanels(GameObject currentPanel, GameObject targetPanel)
     {   
         // Save references to the position of the panels to avoid issues

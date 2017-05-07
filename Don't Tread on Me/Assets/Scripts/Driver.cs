@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TeamUtility.IO;
 
 public class Driver : MonoBehaviour {
@@ -33,7 +34,8 @@ public class Driver : MonoBehaviour {
     public GameObject rightTreadPivot;
     public GameObject leftTreadPivot;
 
-
+    public GameObject abilityIcon;
+    public Sprite[] abilityIcons = new Sprite[3];
 
     private GameObject inputMngr;
     private PlayerRoles playerRoles;
@@ -60,6 +62,8 @@ public class Driver : MonoBehaviour {
 
     private Dictionary<AmmoTypes, List<string>> ammoCombos = new Dictionary<AmmoTypes, List<string>>();
     private Dictionary<List<string>, GameObject[]> comboButtons = new Dictionary<List<string>, GameObject[]>();
+
+    public GameObject playerIcon;
 
 
     // Use this for initialization
@@ -90,6 +94,8 @@ public class Driver : MonoBehaviour {
         playerRoles.SetComboTextures(comboButtons);
 
         playerID = inputMngr.GetComponent<PlayerRoles>().driver;
+
+        abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedMode];
     }
 	
     //if something stays in the trigger box
@@ -141,6 +147,8 @@ public class Driver : MonoBehaviour {
 	void Update () {
 
         if (playerID != inputMngr.GetComponent<PlayerRoles>().driver) return;
+
+        playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 
         if (selectedMode == 1)
         {
@@ -303,6 +311,7 @@ public class Driver : MonoBehaviour {
             if (currentCombo.Count == 4)
             {
                 selectedMode = playerRoles.SelectAmmo(currentCombo, ammoCombos);
+                abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedMode];
                 currentCombo = new List<string>();
             }
 

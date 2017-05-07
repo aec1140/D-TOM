@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TeamUtility.IO;
 
 public class Gunner : MonoBehaviour {
@@ -28,6 +29,9 @@ public class Gunner : MonoBehaviour {
 
     // Weapon Swapping
     public GameObject ammoPanel;
+
+    public GameObject abilityIcon;
+    public Sprite[] abilityIcons = new Sprite[3];
 
     private bool reloading = false;
     private bool attemptedReload = false;
@@ -57,6 +61,8 @@ public class Gunner : MonoBehaviour {
     private GameObject inputMngr;
     private PlayerRoles playerRoles;
     public PlayerID playerID;
+
+    public GameObject playerIcon;
 
     // Use this for initialization
     void Start () {
@@ -88,12 +94,17 @@ public class Gunner : MonoBehaviour {
         playerRoles.SetComboTextures(comboButtons);
 
         playerID = inputMngr.GetComponent<PlayerRoles>().gunner;
+
+        abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedAmmo];
     }
 	
 	// Update is called once per frame
 	void Update () {
 
         if (playerID != playerRoles.gunner) return;
+        print((int)playerID);
+
+        playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 
         #region tank top rotation
 
@@ -200,6 +211,7 @@ public class Gunner : MonoBehaviour {
             if (currentCombo.Count == 4)
             {
                 selectedAmmo = playerRoles.SelectAmmo(currentCombo, ammoCombos);
+                abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedAmmo];
                 currentCombo = new List<string>();
             }
 

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TeamUtility.IO;
 
 public class Commander : MonoBehaviour {
@@ -45,6 +46,10 @@ public class Commander : MonoBehaviour {
     private LineRenderer myLineRenderer;
 
     // mode switching
+    public GameObject abilityIcon;
+    public Sprite[] abilityIcons = new Sprite[3];
+
+
     public enum AmmoTypes { CarePackage, Shield, Airstrike };
     private int selectedMode = (int)AmmoTypes.CarePackage;
 
@@ -70,6 +75,8 @@ public class Commander : MonoBehaviour {
     private GameObject inputMngr;
     private PlayerRoles playerRoles;
     public PlayerID playerID;
+
+    public GameObject playerIcon;
 
     // Use this for initialization
     void Start () {
@@ -98,12 +105,16 @@ public class Commander : MonoBehaviour {
         playerRoles.SetComboTextures(comboButtons);
 
         playerID = inputMngr.GetComponent<PlayerRoles>().commander;
+
+        abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedMode];
     }
 	
 	// Update is called once per frame
 	void Update () {
 
         if (playerID != inputMngr.GetComponent<PlayerRoles>().commander) return;
+
+        playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 
         // follow the tank
         Vector3 temp = follow.transform.position - oldTargetPosition;
@@ -160,6 +171,7 @@ public class Commander : MonoBehaviour {
             if (currentCombo.Count == 4)
             {
                 selectedMode = playerRoles.SelectAmmo(currentCombo, ammoCombos);
+                abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedMode];
                 currentCombo = new List<string>();
             }
 
