@@ -32,14 +32,21 @@ public class EnemyTank : MonoBehaviour
 
     public ParticleSystem explosion;
 
+    GameManager gameManager;
+    protected int pointWorth = 50;
+
+
     // Use this for initialization
     void Start()
     {
+        target = GameObject.Find("Player");
         rocketTrue = true;
         slowed = false;
 
         baseSpeed = speed;
         baseRotateSpeed = rotateSpeed;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -50,6 +57,7 @@ public class EnemyTank : MonoBehaviour
         if (currentHP <= 0)
         {
             Instantiate(explosion, transform.position, transform.rotation);
+            gameManager.SetScore(pointWorth);
             Destroy(this.gameObject);
         }
 
