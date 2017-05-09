@@ -6,18 +6,18 @@ public class Building : MonoBehaviour {
 
     public GameObject[] enemies = new GameObject[3];
     public float respawnTime = 5.0f;
-
+    GameObject player;
     private float timeLast = 0.0f;
 
 	// Use this for initialization
 	void Start () {
-		
+        player = GameObject.FindGameObjectWithTag("Player");
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Time.time - timeLast > respawnTime)
+        if (Time.time - timeLast > respawnTime && player)
         {
             Instantiate(enemies[Random.Range(0, 2)], this.gameObject.transform.position, Quaternion.identity);
             timeLast = Time.time;

@@ -90,7 +90,7 @@ public class EnemyInfantry : MonoBehaviour {
     void Acquire()
     {
         /*if the target is within detection range*/
-        if (Vector3.Distance(target.transform.position, transform.position) < detectionRange)
+        if (target && Vector3.Distance(target.transform.position, transform.position) < detectionRange)
         {
             //print("target sighted");
             /*if the target is within shooting range*/

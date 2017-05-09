@@ -46,7 +46,8 @@ public class HP : MonoBehaviour {
         if (CurrHP <= 0)
         {
             //destroy the tank
-            print("She's dead, Jim");
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Destroy(player);
         }
     }//take damage
 
