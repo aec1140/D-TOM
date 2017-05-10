@@ -33,9 +33,6 @@ public class EnemyInfantry : MonoBehaviour {
 
     public ParticleSystem explosion;
 
-    GameManager gameManager;
-    protected int pointWorth = 10;
-
     // Use this for initialization
     void Start()
     {

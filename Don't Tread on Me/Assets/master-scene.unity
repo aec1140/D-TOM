@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -528,6 +528,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &54294771
@@ -1994,6 +1995,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 1
+  pointWorth: 0
   explosion: {fileID: 0}
 --- !u!1001 &343112083
 Prefab:
@@ -2925,6 +2927,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &442180043
@@ -3102,6 +3105,7 @@ MonoBehaviour:
   speed: 6
   rotateSpeed: 6
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!1 &469953242 stripped
@@ -3173,6 +3177,7 @@ MonoBehaviour:
   speed: 6
   rotateSpeed: 6
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!1 &476315510
@@ -3445,6 +3450,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &514659713
@@ -5991,6 +5997,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!65 &735407000
@@ -7491,6 +7498,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &927514275
@@ -8383,6 +8391,7 @@ MonoBehaviour:
   speed: 6
   rotateSpeed: 6
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!1 &1074128556
@@ -8554,6 +8563,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &1105109581
@@ -11652,6 +11662,7 @@ MonoBehaviour:
   speed: 6
   rotateSpeed: 6
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!1 &1480502369 stripped
@@ -12001,6 +12012,7 @@ MonoBehaviour:
   speed: 6
   rotateSpeed: 6
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!1 &1541342782
@@ -13528,6 +13540,7 @@ MonoBehaviour:
   speed: 6
   rotateSpeed: 6
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!1 &1769354333 stripped
@@ -14828,6 +14841,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &1908542522
@@ -16264,6 +16278,7 @@ MonoBehaviour:
   speed: 8
   rotateSpeed: 2.5
   reloadTime: 3
+  pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
 --- !u!114 &2129889578

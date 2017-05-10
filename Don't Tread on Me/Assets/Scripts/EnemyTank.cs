@@ -37,10 +37,6 @@ public class EnemyTank : MonoBehaviour
 
     public ParticleSystem explosion;
 
-    GameManager gameManager;
-    protected int pointWorth = 50;
-
-
     // Use this for initialization
     void Start()
     {
