@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
 
     private int score = 0;
     public GameObject scoreText;
@@ -15,7 +14,7 @@ public class GameManager : MonoBehaviour
 
     private GameObject player;
 
-    void Start()
+    void Start ()
     {
         mainUi.SetActive(true);
         gameOver.SetActive(false);
@@ -23,13 +22,13 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+	// Update is called once per frame
+	void Update ()
     {
         if (!player) EndGame();
 
         scoreText.GetComponent<Text>().text = "Score: " + score;
-    }
+	}
 
     public void SetScore(int points)
     {
@@ -44,5 +43,3 @@ public class GameManager : MonoBehaviour
         finalScore.text = "Final Score: " + score;
     }
 }
-
-

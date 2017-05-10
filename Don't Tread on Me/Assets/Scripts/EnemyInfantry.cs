@@ -33,6 +33,9 @@ public class EnemyInfantry : MonoBehaviour {
 
     public ParticleSystem explosion;
 
+    GameManager gameManager;
+    protected int pointWorth = 10;
+
     // Use this for initialization
     void Start()
     {
@@ -45,6 +48,8 @@ public class EnemyInfantry : MonoBehaviour {
         baseSpeed = speed;
 
         target = GameObject.Find("Player");
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
         //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
@@ -95,7 +100,7 @@ public class EnemyInfantry : MonoBehaviour {
     void Acquire()
     {
         /*if the target is within detection range*/
-        if (Vector3.Distance(target.transform.position, transform.position) < detectionRange)
+        if (target && Vector3.Distance(target.transform.position, transform.position) < detectionRange)
         {
             //print("target sighted");
             /*if the target is within shooting range*/

@@ -37,6 +37,10 @@ public class EnemyTank : MonoBehaviour
 
     public ParticleSystem explosion;
 
+    GameManager gameManager;
+    protected int pointWorth = 50;
+
+
     // Use this for initialization
     void Start()
     {
@@ -51,6 +55,8 @@ public class EnemyTank : MonoBehaviour
 
         baseSpeed = speed;
         baseRotateSpeed = rotateSpeed;
+
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -97,7 +103,7 @@ public class EnemyTank : MonoBehaviour
     void Acquire()
     {
         /*if the target is within detection range*/
-        if (Vector3.Distance(target.transform.position, tankBody.transform.position) < detectionRange)
+        if (target && Vector3.Distance(target.transform.position, tankBody.transform.position) < detectionRange)
         {
             //print("target sighted");
             /*if the target is within shooting range*/

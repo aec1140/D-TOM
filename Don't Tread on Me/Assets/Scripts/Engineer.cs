@@ -93,7 +93,7 @@ public class Engineer : MonoBehaviour {
         inputMngr = GameObject.Find("InputManager");
         playerRoles = inputMngr.GetComponent<PlayerRoles>();
         playerRoles.HidePanel(anim, ammoPanel);
-        //playerRoles.SetComboTextures(comboButtons);
+        playerRoles.SetComboTextures(comboButtons);
 
         playerID = inputMngr.GetComponent<PlayerRoles>().engineer;
 
@@ -102,8 +102,6 @@ public class Engineer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (playerID != inputMngr.GetComponent<PlayerRoles>().engineer) return;
 
         playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 

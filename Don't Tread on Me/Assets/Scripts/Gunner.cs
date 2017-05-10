@@ -22,9 +22,6 @@ public class Gunner : MonoBehaviour {
     public enum AmmoTypes { Default, HighExplosive, ArmorPiercing };
     private int selectedAmmo = (int)AmmoTypes.Default;
 
-    public GameObject marker;
-    public GameObject sweetSpot;
-    public GameObject lineRail;
     public GameObject reloadPanel;
 
     // Weapon Swapping
@@ -35,10 +32,10 @@ public class Gunner : MonoBehaviour {
 
     private bool reloading = false;
     private bool attemptedReload = false;
-    private Vector3 initialPos;
+    public Slider activeReload;
 
     // for ammo
-    private float reloadSpeed = 50.0f;
+    private float reloadSpeed = 0.01f;
     private List<string> currentCombo = new List<string>();
 
     private List<string> standard_shot_combo = new List<string> { "Button A", "Button Y", "Button X", "Button X" };
@@ -71,9 +68,6 @@ public class Gunner : MonoBehaviour {
         // pull in rockets script
         rockets = GetComponent<Rockets>();
 
-        // init active reload
-        initialPos = marker.transform.position;
-
         // init ammo swap
         ammoCombos.Add(AmmoTypes.Default, standard_shot_combo);
         ammoCombos.Add(AmmoTypes.HighExplosive, he_shot_combo);
@@ -100,10 +94,6 @@ public class Gunner : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (playerID != playerRoles.gunner) return;
-        print((int)playerID);
-
         playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 
         #region tank top rotation
@@ -146,11 +136,6 @@ public class Gunner : MonoBehaviour {
         #region main gun
         if (!reloading)
         {
-            // draw line
-            // ToDo: this should be a raycast to help see what it is aiming at
-            // Vector3 forward = launcher.transform.TransformDirection(Vector3.forward) * 20;
-            // Debug.DrawRay(launcher.transform.position, forward, Color.red);
-
             if (InputManager.GetAxis("Right Trigger", playerID) == 1)
             {
                 // ToDo: ammotype needs to be implemented
@@ -164,15 +149,14 @@ public class Gunner : MonoBehaviour {
 
         else if (reloading)
         {
-            marker.transform.Translate(Vector3.right * Time.deltaTime * reloadSpeed);
+            activeReload.value += reloadSpeed;
 
             if (InputManager.GetAxis("Left Trigger", playerID) > 0 && !attemptedReload)
             {
 
-                if (marker.transform.position.x < sweetSpot.transform.position.x + 20.0f - 10 &&
-                    marker.transform.position.x + 7.0f > sweetSpot.transform.position.x)
+                if (activeReload.value >= 0.45f && activeReload.value <= 0.55f)
                 {
-                    marker.transform.position = initialPos;
+                    activeReload.value = 0;
                     reloading = false;
 
                     playerRoles.HidePanel(anim, reloadPanel);
@@ -181,15 +165,13 @@ public class Gunner : MonoBehaviour {
                 else
                 {
                     attemptedReload = true;
-                    reloadSpeed = 25;
                 }
             }
-            if (marker.transform.position.x >= (lineRail.transform.position.x + 109)) // adding half the width of line rail should make this dynamic
+            if (activeReload.value >= 1) // adding half the width of line rail should make this dynamic
             {
-                marker.transform.position = initialPos;
+                activeReload.value = 0; ;
                 reloading = false;
                 attemptedReload = false;
-                reloadSpeed = 50;
 
                 playerRoles.HidePanel(anim, reloadPanel);
                 launcher.GetComponent<LineRenderer>().enabled = true;
