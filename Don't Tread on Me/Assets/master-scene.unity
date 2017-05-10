@@ -11892,6 +11892,7 @@ MonoBehaviour:
   - {fileID: 1400442889086796, guid: 773422600dadeec498e8ee201cf46eea, type: 2}
   - {fileID: 1400442889086796, guid: 773422600dadeec498e8ee201cf46eea, type: 2}
   respawnTime: 5
+  health: 1
 --- !u!65 &1512240282
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13061,6 +13062,7 @@ MonoBehaviour:
   - {fileID: 1638969032333124, guid: 486374d02113d1842bb6979c9a3d55c7, type: 2}
   - {fileID: 1794377638443472, guid: cb00e29ea260c334f8139943345d34e5, type: 2}
   respawnTime: 2
+  health: 10
 --- !u!1001 &1678179750
 Prefab:
   m_ObjectHideFlags: 0
@@ -13264,6 +13266,7 @@ MonoBehaviour:
   - {fileID: 1400442889086796, guid: 773422600dadeec498e8ee201cf46eea, type: 2}
   - {fileID: 1400442889086796, guid: 773422600dadeec498e8ee201cf46eea, type: 2}
   respawnTime: 5
+  health: 10
 --- !u!1 &1740562772
 GameObject:
   m_ObjectHideFlags: 0
@@ -16325,6 +16328,7 @@ MonoBehaviour:
   - {fileID: 1638969032333124, guid: 486374d02113d1842bb6979c9a3d55c7, type: 2}
   - {fileID: 1794377638443472, guid: cb00e29ea260c334f8139943345d34e5, type: 2}
   respawnTime: 2
+  health: 10
 --- !u!64 &2130989239
 MeshCollider:
   m_ObjectHideFlags: 0
