@@ -9,9 +9,9 @@ public class EnemyInfantry : MonoBehaviour {
     // Variable Declaration
     public Rigidbody Projectile = null;
     private const float SPAWN_DISTANCE = 1.0f;
-    public int power = 20;
+    public int power = 50;
     public float detectionRange = 50;
-    public float shootingRange = 10;
+    public float shootingRange = 15;
 
     public GameObject target;
 
@@ -23,7 +23,8 @@ public class EnemyInfantry : MonoBehaviour {
     float baseSpeed;
     float baseRotateSpeed;
 
-    public float reloadTime = 3.0f;
+    public float reloadTimeSeed = 3.0f;
+    private float reloadTime;
     private float timeLast = 0.0f;
 
     GameManager gameManager;
@@ -48,8 +49,7 @@ public class EnemyInfantry : MonoBehaviour {
 
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
-        //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationX;
-        //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeRotationZ;
+        reloadTime = Random.Range(reloadTimeSeed - 1.0f, reloadTimeSeed + 1.0f);
     }
 
     void Update()
@@ -78,19 +78,11 @@ public class EnemyInfantry : MonoBehaviour {
     }
 
     //changed all forces to point up, because for some rason the launcher.transform.forward points down into the ground
-    void FireProjectile(int type)
+    void FireProjectile()
     {
         Rigidbody clone;
-        if (type == 0)
-        {
-            clone = Instantiate(Projectile, transform.position + (SPAWN_DISTANCE * transform.up), transform.rotation) as Rigidbody;
-        }
-        else
-        {
-            clone = Instantiate(Projectile, transform.position + (SPAWN_DISTANCE * transform.up), transform.rotation) as Rigidbody;
-        }
-        clone.velocity = transform.TransformDirection(Vector3.up * power);
-        //Destroy(clone);
+        clone = Instantiate(Projectile, transform.position + (SPAWN_DISTANCE * transform.forward), transform.rotation) as Rigidbody;
+        clone.velocity = transform.TransformDirection(Vector3.forward * power);
     }
 
 
@@ -103,19 +95,32 @@ public class EnemyInfantry : MonoBehaviour {
             /*if the target is within shooting range*/
             if (Vector3.Distance(target.transform.position, transform.position) < shootingRange)
             {
-                //print("target within range");
-                /*aim at target*/
                 transform.LookAt(target.transform.position);
-                // print(this.gameObject.name + " shooting");
-                //print("taking aim");
-                /*and fire*/
-                //print("firing");
-                //commneted out because different infantry types are a little out of scope
-                //if (Time.time - timeLast > reloadTime)
-                //{
-                //    FireProjectile(0);
-                //    timeLast = Time.time;
-                //}//reload time
+
+                //check to make sure you're not going to hit your friend
+                Ray ray = new Ray(transform.position, target.transform.position - transform.position);
+                //if hit something within certain distance, pick another direction
+                RaycastHit obstacle;
+                //Debug.DrawRay(transform.position, target.transform.position - transform.position);
+                if (Physics.Raycast(ray, out obstacle, shootingRange))
+                {
+                    //if what you hit is the player, terrain, or the flamethrowerbox
+                    if (obstacle.collider.GetComponent<PlayerTank>() || obstacle.collider.name == "Terrain" || obstacle.collider.name == "flameThrowerBox")
+                    {
+                        //shoot at it
+                        if (Time.time - timeLast > reloadTime)
+                        {
+                            FireProjectile();
+                            timeLast = Time.time;
+                        }//reload time
+                    }
+                    else
+                    {
+                        //do nothing
+                        //print(obstacle.collider.name + " in path");
+                        return;
+                    }
+                }
             }
             else
             {

@@ -128,6 +128,18 @@ public class Driver : MonoBehaviour {
             harpoonClone.GetComponent<Harpoon>().SetSlamActive(false);
             other.gameObject.GetComponent<HP>().TakeDamage(200);
         }
+        else if (other.gameObject.GetComponent<HP>())
+        {
+            other.gameObject.GetComponent<HP>().TakeDamage(20);
+        }
+    }
+
+    void OnCollisionStay(Collision other)
+    {
+        if (other.gameObject.GetComponent<HP>())
+        {
+            other.gameObject.GetComponent<HP>().TakeDamage(Time.deltaTime * 10);
+        }
     }
 
     void LaunchHarpoon()
