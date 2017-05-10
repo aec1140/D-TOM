@@ -29,6 +29,7 @@ public class Engineer : MonoBehaviour {
 
     Camera mainCamera;
     private const float SPAWN_DISTANCE = 3.5f;
+    private float distanceAdjMine = 1f;
 
     public GameObject engineerPanel;
     private Animator anim;
@@ -77,13 +78,13 @@ public class Engineer : MonoBehaviour {
 
         // init ammo swap
         ammoCombos.Add(AmmoTypes.Default, standard_grenade_combo);
-        ammoCombos.Add(AmmoTypes.Mine, mine_grenade_combo);
         ammoCombos.Add(AmmoTypes.Magnet, magnet_grenade_combo);
+        ammoCombos.Add(AmmoTypes.Mine, mine_grenade_combo);
         ammoCombos.Add(AmmoTypes.Slow, slow_grenade_combo);
         
         comboButtons.Add(standard_grenade_combo, standard_grenade_buttons);
-        comboButtons.Add(mine_grenade_combo, mine_grenade_buttons);
         comboButtons.Add(magnet_grenade_combo, magnet_grenade_buttons);
+        comboButtons.Add(mine_grenade_combo, mine_grenade_buttons);
         comboButtons.Add(slow_grenade_combo, slow_grenade_buttons);
 
         reticleLight = reticle.GetComponent<Light>();
@@ -190,11 +191,11 @@ public class Engineer : MonoBehaviour {
                     case (int)AmmoTypes.Default:
                         reticleLight.color = Color.green;
                         break;
-                    case (int)AmmoTypes.Mine:
-                        reticleLight.color = Color.blue;
-                        break;
                     case (int)AmmoTypes.Magnet:
                         reticleLight.color = Color.red;
+                        break;
+                    case (int)AmmoTypes.Mine:
+                        reticleLight.color = Color.blue;
                         break;
                     case (int)AmmoTypes.Slow:
                         reticleLight.color = Color.cyan;
@@ -253,7 +254,6 @@ public class Engineer : MonoBehaviour {
 
     void ThrowGrenade()
     {
-
         // Gets the direction from tank to reticle. May not be the most optimal way.
         Vector3 reticleTowards = reticle.transform.position - target.transform.position;
         float reticleDistance = reticleTowards.magnitude;
@@ -265,25 +265,21 @@ public class Engineer : MonoBehaviour {
             // sets velocity based on reticle distance from tank. May not be the most optimal way.
             clone.velocity = reticleDirection * (reticleDistance - 3.1f);
         }
-        if (selectedAmmo == (int)AmmoTypes.Mine)
-        {
-            Rigidbody clone = Instantiate(mineAmmo, target.transform.position + (SPAWN_DISTANCE * reticleDirection) + new Vector3(0,-2.2f,0), target.transform.rotation) as Rigidbody;
-            
-        }
         if (selectedAmmo == (int)AmmoTypes.Magnet)
         {
             Rigidbody clone = Instantiate(magnetAmmo, target.transform.position + (SPAWN_DISTANCE * reticleDirection), target.transform.rotation) as Rigidbody;
             clone.velocity = reticleDirection * (reticleDistance - 3.1f);
         }
+        if (selectedAmmo == (int)AmmoTypes.Mine)
+        {
+            Rigidbody clone = Instantiate(mineAmmo, target.transform.position + ((SPAWN_DISTANCE +  distanceAdjMine) * (reticleDirection - new Vector3(0, reticleDirection.y ,0))) , target.transform.rotation) as Rigidbody;
+            
+        }
         if (selectedAmmo == (int)AmmoTypes.Slow)
         {
             Rigidbody clone = Instantiate(slowAmmo, target.transform.position + (SPAWN_DISTANCE * reticleDirection), target.transform.rotation) as Rigidbody;
             clone.velocity = reticleDirection * (reticleDistance - 3.1f);
-        }
-
-
-
-        
+        }  
     }
 
 
