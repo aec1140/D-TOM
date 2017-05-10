@@ -17,16 +17,6 @@ public class ExplodeMine : MonoBehaviour {
     public float armTime = 1f;
     private float placeTime;
 
-    //public float forceV = 30; // for AddExplosionForce - explosionForce
-    //public float radiusV = 15; // for AddExplosionForce - explosionRadius
-    //public ForceMode fModeV = ForceMode.VelocityChange;
-
-    //Vector3 TossDirection;
-    //public float speed = 10;
-
-    //GameObject thing;
-    //public rockets rocketa;
-
     GameObject player;
     PlayerTank playertank;
 
@@ -39,8 +29,6 @@ public class ExplodeMine : MonoBehaviour {
         playertank = player.GetComponent<PlayerTank>();
 
         placeTime = Time.time;
-        // explosion = GetComponent<ParticleSystem>();
-        // explosion.playOnAwake = false;
     }
 
     // Update is called once per frame

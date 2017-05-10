@@ -26,14 +26,21 @@ public class EnemyInfantry : MonoBehaviour {
     public float reloadTime = 3.0f;
     private float timeLast = 0.0f;
 
-    public ParticleSystem explosion;
-
     GameManager gameManager;
-    protected int pointWorth = 10;
+    GameObject gm;
+
+    public int pointWorth;
+
+    public ParticleSystem explosion;
 
     // Use this for initialization
     void Start()
     {
+        gm = GameObject.Find("GameManager");
+        gameManager = gm.GetComponent<GameManager>();
+
+        pointWorth = 10;
+
         slowed = false;
         baseSpeed = speed;
 

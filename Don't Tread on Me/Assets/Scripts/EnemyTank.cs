@@ -30,15 +30,21 @@ public class EnemyTank : MonoBehaviour
     public float reloadTime = 3.0f;
     private float timeLast = 0.0f;
 
-    public ParticleSystem explosion;
-
     GameManager gameManager;
-    protected int pointWorth = 50;
+    GameObject gm;
 
+    public int pointWorth;
+
+    public ParticleSystem explosion;
 
     // Use this for initialization
     void Start()
     {
+        gm = GameObject.Find("GameManager");
+        gameManager = gm.GetComponent<GameManager>();
+
+        pointWorth = 50;
+        
         target = GameObject.Find("Player");
         rocketTrue = true;
         slowed = false;

@@ -12,9 +12,12 @@ public class Engineer : MonoBehaviour {
     public Rigidbody magnetAmmo = null;
     public Rigidbody slowAmmo = null;
 
+    
+
     // For Grenade aiming
     public GameObject target;
     public GameObject reticle;
+    Light reticleLight;
     private Vector3 oldTargetPosition;
     public float translateSpeed = 10.0f;
     bool snapBack = true;
@@ -83,6 +86,7 @@ public class Engineer : MonoBehaviour {
         comboButtons.Add(magnet_grenade_combo, magnet_grenade_buttons);
         comboButtons.Add(slow_grenade_combo, slow_grenade_buttons);
 
+        reticleLight = reticle.GetComponent<Light>();
 
         // Init
         anim = engineerPanel.GetComponent<Animator>();
@@ -180,6 +184,22 @@ public class Engineer : MonoBehaviour {
                 selectedAmmo = playerRoles.SelectAmmo(currentCombo, ammoCombos);
                 abilityIcon.GetComponent<Image>().sprite = abilityIcons[selectedAmmo];
                 currentCombo = new List<string>();
+
+                switch (selectedAmmo)
+                {
+                    case (int)AmmoTypes.Default:
+                        reticleLight.color = Color.green;
+                        break;
+                    case (int)AmmoTypes.Mine:
+                        reticleLight.color = Color.blue;
+                        break;
+                    case (int)AmmoTypes.Magnet:
+                        reticleLight.color = Color.red;
+                        break;
+                    case (int)AmmoTypes.Slow:
+                        reticleLight.color = Color.cyan;
+                        break;
+                }
              }
 
              // display the options when pushing left bumper
@@ -247,7 +267,7 @@ public class Engineer : MonoBehaviour {
         }
         if (selectedAmmo == (int)AmmoTypes.Mine)
         {
-            Rigidbody clone = Instantiate(mineAmmo, target.transform.position + (SPAWN_DISTANCE * reticleDirection) + new Vector3(0,-2,0), target.transform.rotation) as Rigidbody;
+            Rigidbody clone = Instantiate(mineAmmo, target.transform.position + (SPAWN_DISTANCE * reticleDirection) + new Vector3(0,-2.2f,0), target.transform.rotation) as Rigidbody;
             
         }
         if (selectedAmmo == (int)AmmoTypes.Magnet)
