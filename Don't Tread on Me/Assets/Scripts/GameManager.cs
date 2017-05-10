@@ -1,38 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour {
+public class GameManager : MonoBehaviour
+{
 
+    private int score = 0;
+    public GameObject scoreText;
+    public GameObject mainUi;
 
-    public int score;
+    public GameObject gameOver;
+    public Text finalScore;
 
-	// Use this for initialization
-	void Start () {
-        score = 0;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    private GameObject player;
+
+    void Start()
+    {
+        mainUi.SetActive(true);
+        gameOver.SetActive(false);
+
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!player) EndGame();
+
+        scoreText.GetComponent<Text>().text = "Score: " + score;
+    }
 
     public void SetScore(int points)
     {
         score += points;
-        UpdateScore();
     }
 
-    public int GetScore()
+    public void EndGame()
     {
-        return score;
-    }
+        gameOver.SetActive(true);
+        mainUi.SetActive(false);
 
-    void UpdateScore()
-    {
-        // Updates score UI
-        Debug.Log("Score: " + score);
+        finalScore.text = "Final Score: " + score;
     }
-
 }
+
 
