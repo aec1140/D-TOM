@@ -3096,15 +3096,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd,
     type: 2}
-  power: 20
+  power: 50
   detectionRange: 50
-  shootingRange: 10
+  shootingRange: 15
   target: {fileID: 1590634369}
   slowed: 0
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
@@ -3168,15 +3168,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd,
     type: 2}
-  power: 20
+  power: 50
   detectionRange: 50
-  shootingRange: 10
+  shootingRange: 15
   target: {fileID: 1590634369}
   slowed: 0
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
@@ -6885,6 +6885,16 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1590634369}
+    - target: {fileID: 114119617593538126, guid: cc1610d24261bbf418cecdaf15c9b781,
+        type: 2}
+      propertyPath: shootingRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114119617593538126, guid: cc1610d24261bbf418cecdaf15c9b781,
+        type: 2}
+      propertyPath: power
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cc1610d24261bbf418cecdaf15c9b781, type: 2}
   m_IsPrefabParent: 0
@@ -7764,6 +7774,16 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1590634369}
+    - target: {fileID: 114949007771966708, guid: cb00e29ea260c334f8139943345d34e5,
+        type: 2}
+      propertyPath: shootingRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114949007771966708, guid: cb00e29ea260c334f8139943345d34e5,
+        type: 2}
+      propertyPath: power
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb00e29ea260c334f8139943345d34e5, type: 2}
   m_IsPrefabParent: 0
@@ -8382,15 +8402,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd,
     type: 2}
-  power: 20
+  power: 50
   detectionRange: 50
-  shootingRange: 10
+  shootingRange: 15
   target: {fileID: 1590634369}
   slowed: 0
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
@@ -10583,6 +10603,16 @@ Prefab:
       propertyPath: target
       value: 
       objectReference: {fileID: 1590634369}
+    - target: {fileID: 114974543891163784, guid: 486374d02113d1842bb6979c9a3d55c7,
+        type: 2}
+      propertyPath: shootingRange
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114974543891163784, guid: 486374d02113d1842bb6979c9a3d55c7,
+        type: 2}
+      propertyPath: power
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 486374d02113d1842bb6979c9a3d55c7, type: 2}
   m_IsPrefabParent: 0
@@ -11653,15 +11683,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd,
     type: 2}
-  power: 20
+  power: 50
   detectionRange: 50
-  shootingRange: 10
+  shootingRange: 15
   target: {fileID: 1590634369}
   slowed: 0
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
@@ -12004,15 +12034,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd,
     type: 2}
-  power: 20
+  power: 50
   detectionRange: 50
-  shootingRange: 10
+  shootingRange: 15
   target: {fileID: 1590634369}
   slowed: 0
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
@@ -13534,15 +13564,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930, guid: 6b0739d1b820eaf43b9295ec6d6ac6fd,
     type: 2}
-  power: 20
+  power: 50
   detectionRange: 50
-  shootingRange: 10
+  shootingRange: 15
   target: {fileID: 1590634369}
   slowed: 0
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}
