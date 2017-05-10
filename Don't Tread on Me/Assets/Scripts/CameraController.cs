@@ -50,76 +50,79 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // follow the tank
-        Vector3 follow = target.transform.position - oldTargetPosition;
-        mainCamera.transform.Translate(follow, Space.World);
-        originalPosition += follow;
-
-        #region unused
-        /*
-        // old position
-        oldPosition = transform.position;
-
-        // only take input if commander
-        if (amCommander)
+        if (target)
         {
-            // apple input
-            if (InputManager.GetAxis("Left Stick Vertical", commander) != 0.0f)
+            Vector3 follow = target.transform.position - oldTargetPosition;
+            mainCamera.transform.Translate(follow, Space.World);
+            originalPosition += follow;
+
+            #region unused
+            /*
+            // old position
+            oldPosition = transform.position;
+
+            // only take input if commander
+            if (amCommander)
             {
-                transform.Translate(new Vector3(1, 0, 1) * -InputManager.GetAxis("Left Stick Vertical", commander) * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
-            }
-            if (InputManager.GetAxis("Left Stick Horizontal", commander) != 0.0f)
-            {
-                transform.Translate(new Vector3(-1, 0, 1) * -InputManager.GetAxis("Left Stick Horizontal", commander) * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
-            }
-        }
-
-        // check to see if too far away
-        Vector3 a = transform.position;
-        a.y = 0;
-
-        Vector3 b = target.transform.position;
-        b.y = 0;
-        b.x = b.x - xOffset;
-        b.z = b.z - xOffset;
-
-        Vector3 c = oldPosition;
-        c.y = 0;
-
-        // because you cant just add staight to the x and z value of transform position
-        Vector3 correction = transform.position;
-
-        // Method 1 (rectangular bounds)
-        if (Mathf.Abs((a.x - a.z) - (b.x - b.z)) > distanceCap)
-        {
-            correction.x = oldPosition.x;
-            correction.z = oldPosition.z;
-        }
-
-        if (Mathf.Abs((a.x + a.z) - (b.x + b.z)) > distanceCap)
-        {
-            correction.x = oldPosition.x;
-            correction.z = oldPosition.z;
-        }
-        */
-
-        /*
-        if(Vector3.Distance(a, b) > distanceCap)
-        {
-            inputStrength = inputStrength * 0.90f;
-
-            if (Vector3.Distance(a, b) < Vector3.Distance(c, b))
-            {
-                inputStrength = INPUT_STRENGTH;
+                // apple input
+                if (InputManager.GetAxis("Left Stick Vertical", commander) != 0.0f)
+                {
+                    transform.Translate(new Vector3(1, 0, 1) * -InputManager.GetAxis("Left Stick Vertical", commander) * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
+                }
+                if (InputManager.GetAxis("Left Stick Horizontal", commander) != 0.0f)
+                {
+                    transform.Translate(new Vector3(-1, 0, 1) * -InputManager.GetAxis("Left Stick Horizontal", commander) * cameraSpeed * inputStrength * Time.deltaTime, Space.World);
+                }
             }
 
+            // check to see if too far away
+            Vector3 a = transform.position;
+            a.y = 0;
+
+            Vector3 b = target.transform.position;
+            b.y = 0;
+            b.x = b.x - xOffset;
+            b.z = b.z - xOffset;
+
+            Vector3 c = oldPosition;
+            c.y = 0;
+
+            // because you cant just add staight to the x and z value of transform position
+            Vector3 correction = transform.position;
+
+            // Method 1 (rectangular bounds)
+            if (Mathf.Abs((a.x - a.z) - (b.x - b.z)) > distanceCap)
+            {
+                correction.x = oldPosition.x;
+                correction.z = oldPosition.z;
+            }
+
+            if (Mathf.Abs((a.x + a.z) - (b.x + b.z)) > distanceCap)
+            {
+                correction.x = oldPosition.x;
+                correction.z = oldPosition.z;
+            }
+            */
+
+            /*
+            if(Vector3.Distance(a, b) > distanceCap)
+            {
+                inputStrength = inputStrength * 0.90f;
+
+                if (Vector3.Distance(a, b) < Vector3.Distance(c, b))
+                {
+                    inputStrength = INPUT_STRENGTH;
+                }
+
+            }
+
+            transform.position = correction;
+            */
+            #endregion
+
+            // update tank's old position
+            oldTargetPosition = target.transform.position;
         }
-
-        transform.position = correction;
-        */
-        #endregion
-
-        // update tank's old position
-        oldTargetPosition = target.transform.position;
 
         if (amCommander)
         {
@@ -144,7 +147,7 @@ public class CameraController : MonoBehaviour
         }
 
         // avoid wall clipping
-        AvoidWallClipping2();
+        if (target) AvoidWallClipping2();
 
         // camera zoom
         if(InputManager.GetButton("Left Stick Button", commander))

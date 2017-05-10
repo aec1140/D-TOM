@@ -46,7 +46,7 @@ public class HP : MonoBehaviour {
         if (CurrHP <= 0)
         {
             //destroy the tank
-            print("She's dead, Jim");
+            if (tag == "Player") Destroy(this.gameObject);
         }
     }//take damage
 

@@ -111,9 +111,6 @@ public class Commander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (playerID != inputMngr.GetComponent<PlayerRoles>().commander) return;
-
         playerIcon.GetComponent<Image>().sprite = playerRoles.helmets[(int)playerID];
 
         // follow the tank
