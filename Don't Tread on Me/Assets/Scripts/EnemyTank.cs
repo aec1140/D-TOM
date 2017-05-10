@@ -80,17 +80,10 @@ public class EnemyTank : MonoBehaviour
     }
 
     //changed all forces to point up, because for some rason the launcher.transform.forward points down into the ground
-    void FireProjectile(int type)
+    void FireProjectile()
     {
         Rigidbody clone;
-        if (type == 0)
-        {
-            clone = Instantiate(Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.up), Launcher.transform.rotation) as Rigidbody;
-        }
-        else
-        {
-            clone = Instantiate(Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.up), Launcher.transform.rotation) as Rigidbody;
-        }
+        clone = Instantiate(Projectile, Launcher.transform.position + (SPAWN_DISTANCE * Launcher.transform.up), Launcher.transform.rotation) as Rigidbody;
         clone.velocity = Launcher.transform.TransformDirection(Vector3.up * power);
         //Destroy(clone);
     }
@@ -112,16 +105,32 @@ public class EnemyTank : MonoBehaviour
                 Quaternion rot = Quaternion.LookRotation(dir);
                 // slerp to the desired rotation over time
                 tankTop.transform.rotation = Quaternion.Slerp(tankTop.transform.rotation, rot, rotateSpeed * Time.deltaTime);
+                transform.LookAt(target.transform.position);
 
-                //print("taking aim");
-                /*and fire*/
-                //print("firing");
-                if (Time.time - timeLast > reloadTime)
+                //check to make sure you're not going to hit your friend
+                Ray ray = new Ray(transform.position, target.transform.position - transform.position);
+                //if hit something within certain distance, pick another direction
+                RaycastHit obstacle;
+                //Debug.DrawRay(transform.position, target.transform.position - transform.position);
+                if (Physics.Raycast(ray, out obstacle, shootingRange))
                 {
-                    rocketTrue = true;
-                    FireProjectile(0);
-                    timeLast = Time.time;
-                }//reload time
+                    //if what you hit is the player, terrain, or the flamethrowerbox
+                    if (obstacle.collider.GetComponent<PlayerTank>() || obstacle.collider.name == "Terrain" || obstacle.collider.name == "flameThrowerBox")
+                    {
+                        //shoot at it
+                        if (Time.time - timeLast > reloadTime)
+                        {
+                            FireProjectile();
+                            timeLast = Time.time;
+                        }//reload time
+                    }
+                    else
+                    {
+                        //do nothing
+                        //print(obstacle.collider.name + " in path");
+                        return;
+                    }
+                }
             }
             else
             {
