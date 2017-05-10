@@ -11,9 +11,6 @@ public class ExplodeMagnet : MonoBehaviour {
     public float radius = 10f;
     Vector3 pos;
 
-    public AudioClip inspiration;
-    private AudioSource source;
-
     float upTime = 3f;
     private float timeLast = 0.0f;
 
@@ -27,11 +24,6 @@ public class ExplodeMagnet : MonoBehaviour {
     void Start () {
         activation = false;
         timeLast = Time.time;
-
-        source = GetComponent<AudioSource>();
-
-        source.PlayOneShot(inspiration, 1F);
-
     }
 	
 	// Update is called once per frame
@@ -53,8 +45,6 @@ public class ExplodeMagnet : MonoBehaviour {
                 }
 
             }
-
-            //BlowTheFuckUp();
         }
 
 
@@ -69,8 +59,6 @@ public class ExplodeMagnet : MonoBehaviour {
         Projectile.constraints = RigidbodyConstraints.FreezePosition;
 
         activation = true;
-
-        
     }
 
 

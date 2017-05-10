@@ -33,25 +33,17 @@ public class ExplodeSlow : MonoBehaviour {
 
                 if ((hit.gameObject.GetComponent("EnemyTank") as EnemyTank) != null)
                 {
-                    //hit.GetComponent<EnemyTank>().speed = 4f;
-                    //hit.GetComponent<EnemyTank>().reloadTime = 6f;
-                    //hit.GetComponent<EnemyTank>().rotateSpeed = 1f;
                     hit.GetComponent<EnemyTank>().slowed = true;
                 }
 
                 if ((hit.gameObject.GetComponent("EnemyTank") as EnemyTank) != null && Time.time - timeLast > upTime)
                 {
                     hit.GetComponent<EnemyTank>().slowed = false;
-                    //hit.GetComponent<EnemyTank>().speed = 8f;
-                    //hit.GetComponent<EnemyTank>().reloadTime = 3f;
-                    //hit.GetComponent<EnemyTank>().rotateSpeed = 2.5f;
                     Destroy(this.gameObject);
                 }
 
             }
         }
-
-
     }
 
 
