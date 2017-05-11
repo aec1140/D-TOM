@@ -52,6 +52,10 @@ public class CreateWall : MonoBehaviour {
             }
         }
 
+        if(other.gameObject.tag == "EnemyBullet")
+        {
+            DestroyObject(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

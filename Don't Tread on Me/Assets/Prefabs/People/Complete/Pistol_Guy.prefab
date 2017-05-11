@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 962736e656478d64b8d54ede3cd81fc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Projectile: {fileID: 54244762655674206, guid: 0ac1cd11c7513db47b553cbc0eba7880,
+  Projectile: {fileID: 54106240470641072, guid: 5f36ad7232d5917438e1f353d20fc379,
     type: 2}
   power: 20
   detectionRange: 50
@@ -368,7 +368,7 @@ MonoBehaviour:
   slowAmount: 2
   speed: 6
   rotateSpeed: 6
-  reloadTime: 3
+  reloadTimeSeed: 3
   pointWorth: 0
   explosion: {fileID: 198795681502811960, guid: 19a2680b611dfc745b8f2cc31dcb574f,
     type: 2}

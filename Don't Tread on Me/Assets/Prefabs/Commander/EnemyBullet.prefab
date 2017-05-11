@@ -9,48 +9,48 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1499625894707760}
+  m_RootGameObject: {fileID: 1842359490300956}
   m_IsPrefabParent: 1
---- !u!1 &1499625894707760
+--- !u!1 &1842359490300956
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4801519066749384}
-  - component: {fileID: 33056154711892522}
-  - component: {fileID: 23844494181918040}
-  - component: {fileID: 54244762655674206}
-  - component: {fileID: 122306747196394320}
-  - component: {fileID: 65570788236278942}
-  - component: {fileID: 114325437935670284}
+  - component: {fileID: 4495323915486122}
+  - component: {fileID: 33976166095664994}
+  - component: {fileID: 23508275790114046}
+  - component: {fileID: 54106240470641072}
+  - component: {fileID: 65997544176905770}
+  - component: {fileID: 114927559812696440}
+  - component: {fileID: 122000894755309024}
   m_Layer: 0
-  m_Name: Tracer
-  m_TagString: Bullet
+  m_Name: EnemyBullet
+  m_TagString: EnemyBullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4801519066749384
+--- !u!4 &4495323915486122
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -4.6288085, y: 1.607, z: 5.5608296}
+  m_LocalPosition: {x: -4.8873787, y: -1.564036, z: -1.1359711}
   m_LocalScale: {x: 0.012390712, y: 0.012390712, z: 0.012390712}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!23 &23844494181918040
+--- !u!23 &23508275790114046
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -76,19 +76,19 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33056154711892522
+--- !u!33 &33976166095664994
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &54244762655674206
+--- !u!54 &54106240470641072
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -98,36 +98,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65570788236278942
+--- !u!65 &65997544176905770
 BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 50, y: 1000, z: 50}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &114325437935670284
+--- !u!114 &114927559812696440
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86bc1e8f419c133488a4e040dc69284c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 3
---- !u!122 &122306747196394320
+--- !u!122 &122000894755309024
 Halo:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1499625894707760}
+  m_GameObject: {fileID: 1842359490300956}
   m_Enabled: 1
   m_Color:
     serializedVersion: 2
