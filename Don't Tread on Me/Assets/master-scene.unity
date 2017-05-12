@@ -12658,7 +12658,7 @@ MonoBehaviour:
   crate: {fileID: 1169924229024076, guid: 3641d2ce4b4f40443b6ad05958356a1c, type: 2}
   shield: {fileID: 1824874834273488, guid: 095295b0120f8d94dba1b546d81c323b, type: 2}
   mark: {fileID: 1506550621261768, guid: 01bf42d9578940f4bbe7cf6400b5fc70, type: 2}
-  airstrike: {fileID: 1253170212617460, guid: 16f5f84b1fefc5641b6fa8b2c41ad044, type: 2}
+  airstrike: {fileID: 1526571295435768, guid: 16f5f84b1fefc5641b6fa8b2c41ad044, type: 2}
   target: {fileID: 1712835041}
   reticle: {fileID: 343823636}
   reticleChild1: {fileID: 1828638908}
