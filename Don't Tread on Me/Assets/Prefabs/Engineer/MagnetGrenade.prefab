@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1384921786400630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.3994422, y: 5.1483107, z: 16.131287}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 0.15}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -191,7 +191,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Projectile: {fileID: 54356015542667930}
   radius: 8
-  inspiration: {fileID: 8300000, guid: 6c94f26e832d59b42b2c6a1926f24cdf, type: 3}
   explosion: {fileID: 198795681502811960, guid: 263efd08d6f60fc4da463db202ef07f1,
     type: 2}
 --- !u!135 &135061802847842416
