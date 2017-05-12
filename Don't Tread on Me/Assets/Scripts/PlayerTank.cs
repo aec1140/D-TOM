@@ -83,4 +83,13 @@ public class PlayerTank : MonoBehaviour {
             HPbar.transform.GetChild(e).gameObject.SetActive(false);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "EnemyBullet")
+        {
+            this.gameObject.GetComponent<HP>().TakeDamage(2);
+            DestroyObject(other.gameObject);
+        }
+    }
 }

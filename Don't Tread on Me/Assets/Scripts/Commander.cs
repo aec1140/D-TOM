@@ -19,7 +19,12 @@ public class Commander : MonoBehaviour {
     public float translateSpeed = 10.0f;
     public float reticleRotateSpeed = 2.0f;
     public float crateHeight = 100.0f;
+
     public float timerCap = 1.0f;
+    public float timerCapA = 4.0f;
+    public float timerCapB = 2.0f;
+    public float timerCapC = 20.0f;
+
     public float airstrikeHeight = 100.0f;
 
     // Private Properties
@@ -41,7 +46,11 @@ public class Commander : MonoBehaviour {
 
     private float oldRotation;
     private Vector3 oldTargetPosition;
+
     private float timerLast = 0.0f;
+    private float timerLastA = 0.0f;
+    private float timerLastB = 0.0f;
+    private float timerLastC = 0.0f;
 
     private LineRenderer myLineRenderer;
 
@@ -294,26 +303,32 @@ public class Commander : MonoBehaviour {
 
         if (InputManager.GetAxis("Right Trigger", playerID) > 0)
         {
-            if (Time.time - timerLast > timerCap)
+            if (Time.time - timerLastA > timerCapA)
             {
                 if (selectedMode == (int)AmmoTypes.CarePackage)
                 {
                     Vector3 crateStart = target.transform.position;
                     crateStart.y = crateHeight;
                     Instantiate(crate, crateStart, reticle.transform.rotation);
-                    timerLast = Time.time;
+                    timerLastA = Time.time;
                 }
-                if(selectedMode == (int)AmmoTypes.Shield)
+            }
+            if (Time.time - timerLastB > timerCapB)
+            {
+                if (selectedMode == (int)AmmoTypes.Shield)
                 {
                     Instantiate(shield, reticle.transform.position, reticle.transform.rotation);
-                    timerLast = Time.time;
+                    timerLastB = Time.time;
                 }
-                if(selectedMode == (int)AmmoTypes.Airstrike)
+            }
+            if (Time.time - timerLastC > timerCapC)
+            {
+                if (selectedMode == (int)AmmoTypes.Airstrike)
                 {
                     Vector3 strikeStart = target.transform.position;
                     strikeStart.y = airstrikeHeight;
                     Instantiate(airstrike, strikeStart, reticle.transform.rotation);
-                    timerLast = Time.time;
+                    timerLastC = Time.time;
                 }
             }
         }

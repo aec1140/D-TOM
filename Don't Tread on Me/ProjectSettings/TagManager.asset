@@ -9,6 +9,8 @@ TagManager:
   - Reloading
   - Brick
   - Enemy
+  - Bullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

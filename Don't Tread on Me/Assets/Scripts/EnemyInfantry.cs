@@ -133,4 +133,13 @@ public class EnemyInfantry : MonoBehaviour {
         }
         //else do a small patrol route?
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Bullet")
+        {
+            DestroyObject(gameObject);
+            DestroyObject(other.gameObject);
+        }
+    }
 }
