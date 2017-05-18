@@ -120,13 +120,15 @@ public class Driver : MonoBehaviour {
     //boy i hope this doesnt count the flamethrower box
     void OnCollisionEnter(Collision other)
     {
-        //if you are currently slamming, have a harpoon out and what you hit is an enemy tank
-        if (other.gameObject.GetComponent<EnemyTank>() && harpoonOut && harpoonClone.GetComponent<Harpoon>().GetSlamActive())
-        {
-            //remove the harpoon, tell it the slamming is over and wipe the enemy off the face of the planet
-            harpoonClone.GetComponent<Harpoon>().ReleaseHook();
-            harpoonClone.GetComponent<Harpoon>().SetSlamActive(false);
-            other.gameObject.GetComponent<HP>().TakeDamage(200);
+        if (harpoonClone) {
+            //if you are currently slamming, have a harpoon out and what you hit is an enemy tank
+            if (other.gameObject.GetComponent<EnemyTank>() && harpoonOut && harpoonClone.GetComponent<Harpoon>().GetSlamActive())
+            {
+                //remove the harpoon, tell it the slamming is over and wipe the enemy off the face of the planet
+                harpoonClone.GetComponent<Harpoon>().ReleaseHook();
+                harpoonClone.GetComponent<Harpoon>().SetSlamActive(false);
+                other.gameObject.GetComponent<HP>().TakeDamage(200);
+            }
         }
         else if (other.gameObject.GetComponent<HP>())
         {
@@ -196,7 +198,7 @@ public class Driver : MonoBehaviour {
             //press b to initiate slam attack for the glorious union
             if (InputManager.GetButtonDown("Button B", playerID))
             {
-                if (harpoonOut)
+                if (harpoonOut && harpoonClone)
                 {
                     if (harpoonClone.GetComponent<Harpoon>().GetHooked())
                     {

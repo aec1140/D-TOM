@@ -29,12 +29,23 @@ public class HP : MonoBehaviour {
         {
             this.gameObject.GetComponent<EnemyTank>().enabled = false;
         }
+        if (hookedHP && this.gameObject.GetComponent("EnemyInfantry") as EnemyInfantry)
+        {
+            this.gameObject.GetComponent<EnemyInfantry>().enabled = false;
+        }
     }
 
     //enable enemy script
-    public void UnhookTank()
+    public void UnhookEnemy()
     {
-        this.gameObject.GetComponent<EnemyTank>().enabled = true;
+        if (this.gameObject.GetComponent("EnemyTank") as EnemyTank)
+        {
+            this.gameObject.GetComponent<EnemyTank>().enabled = true;
+        }
+        else if (this.gameObject.GetComponent("EnemyInfantry") as EnemyInfantry)
+        {
+            this.gameObject.GetComponent<EnemyInfantry>().enabled = true;
+        }
     }
 
     public void TakeDamage(float damage)
