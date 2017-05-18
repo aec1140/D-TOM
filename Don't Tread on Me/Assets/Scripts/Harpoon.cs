@@ -109,7 +109,7 @@ public class Harpoon : MonoBehaviour {
             if ((hit.gameObject.GetComponent("HP") as HP))
             {
                 hit.gameObject.GetComponent<HP>().SetHookedHP(false);
-                hit.gameObject.GetComponent<HP>().UnhookTank();
+                hit.gameObject.GetComponent<HP>().UnhookEnemy();
             }
         }
     }
